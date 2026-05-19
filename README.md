@@ -1,202 +1,237 @@
 # JSONPlaceholder API Explorer
 
-Personal API exploration project. 
-Making real HTTP requests with Postman and documenting every endpoint I did. 
+A personal API exploration project using Postman and JSONPlaceholder for learning HTTP, REST patterns, and response formats.
+
+---
+
+## Overview
+
+This repository documents how I tested the JSONPlaceholder API endpoints with Postman and captured the request/response behavior.
+
+- API: https://jsonplaceholder.typicode.com
+- Focus: GET, POST, PUT, DELETE, query parameters, and nested JSON responses
+- Goal: Understand request structure, response codes, and payload shape
+
+---
 
 ## What I Learned
 
-### HTTP (Hypertext Transfer Protocol)
-- HTTP is a protocol designed for client-server communication.
+### HTTP basics
+- HTTP is a protocol for client-server communication.
 - A client sends a **request** to the server.
-- The server sends a **response** back to the client.
-- The client is typically a **user agent** such as a web browser.
+- The server returns a **response**.
+- Common status codes: `200`, `201`, `204`, `404`.
 
-### Postman Experimentation 
-- How GET, POST, PUT DELETE works 
-- Difference between path param and query params 
-- What 200, 201, 204, 404 actually look like in a real response 
-- How nested routes works,
- - need to write more content 
+### Postman practice
+- Tested REST methods: `GET`, `POST`, `PUT`, and `DELETE`.
+- Compared path parameters vs query parameters.
+- Observed real JSON responses from a public API.
+- Explored nested objects in resources such as `address` and `company`.
 
+### Tools used
+- Postman
+- JSONPlaceholder
+- Markdown
 
-### Tools I used 
- - Postman (for request testing and collection export)
- - JSONPlaceholder (free fake REST API)
- - Markdown (documentation)
+---
 
- ### API base URL
- `https://jsonplaceholder.typicode.com` 
+## API Base URL
 
- ## Endpoints 
+`https://jsonplaceholder.typicode.com`
 
- ### GET /posts 
- URL : https://jsonplaceholder.typicode.com/posts
- Method : GET 
- Status : 200 OK 
- Returns : Array of 100 posts objects 
- Fileds : userId, id, title, body
+---
 
- Example response: 
- {
-        "userId": 1,
-        "id": 1,
-        "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-        "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum   
-        rerum est autem sunt rem eveniet architecto"
+## Documented Endpoints
 
-   }
+### GET /posts
+- URL: `https://jsonplaceholder.typicode.com/posts`
+- Method: `GET`
+- Status: `200 OK`
+- Returns: Array of 100 post objects
+- Fields: `userId`, `id`, `title`, `body`
 
-### GET /posts/1 
- URL : https://jsonplaceholder.typicode.com/posts/1
- Method : GET 
- Status : 200 OK 
- Returns : Detail of user having id 1
- Fileds : userId, id, title, body
+Example response:
+```json
+{
+  "userId": 1,
+  "id": 1,
+  "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+  "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+}
+```
 
- Example response :
- {
+### GET /posts/1
+- URL: `https://jsonplaceholder.typicode.com/posts/1`
+- Method: `GET`
+- Status: `200 OK`
+- Returns: Single post object
+- Fields: `userId`, `id`, `title`, `body`
+
+Example response:
+```json
+{
+  "userId": 1,
+  "id": 1,
+  "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
+  "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
+}
+```
+
+### GET /posts/999
+- URL: `https://jsonplaceholder.typicode.com/posts/999`
+- Method: `GET`
+- Status: `404 Not Found`
+- Returns: Empty object
+
+Example response:
+```json
+{}
+```
+
+### GET /posts?userId=1
+- URL: `https://jsonplaceholder.typicode.com/posts?userId=1`
+- Method: `GET`
+- Status: `200 OK`
+- Returns: All posts with `userId=1`
+
+Example response:
+```json
+[
+  {
     "userId": 1,
     "id": 1,
     "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
     "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
-}
-
-### GET /posts/999 
--userId 999 does not exists.
-
- URL : https://jsonplaceholder.typicode.com/posts/999
- Method : GET 
- Status : 404 Not Found  
- Returns : {}
- Fields : None
-
- Example response:
-  {}
-
-### GET /posts?userId=1
- URL : https://jsonplaceholder.typicode.com/posts?userId=1
- Method : GET 
- Status : 200 OK
- Returns : Details of users having userId === 1 
- Fields : None
-
- Example response:
-  
+  },
   {
-        "userId": 1,
-        "id": 1,
-        "title": "sunt aut facere repellat provident occaecati excepturi optio reprehenderit",
-        "body": "quia et suscipit\nsuscipit recusandae consequuntur expedita et cum\nreprehenderit molestiae ut ut quas totam\nnostrum rerum est autem sunt rem eveniet architecto"
-    },
-    {
-        "userId": 1,
-        "id": 2,
-        "title": "qui est esse",
-        "body": "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla"
-    },
-    {
-        "userId": 1,
-        "id": 3,
-        "title": "ea molestias quasi exercitationem repellat qui ipsa sit aut",
-        "body": "et iusto sed quo iure\nvoluptatem occaecati omnis eligendi aut ad\nvoluptatem doloribus vel accusantium quis pariatur\nmolestiae porro eius odio et labore et velit aut"
-    },
-
+    "userId": 1,
+    "id": 2,
+    "title": "qui est esse",
+    "body": "est rerum tempore vitae\nsequi sint nihil reprehenderit dolor beatae ea dolores neque\nfugiat blanditiis voluptate porro vel nihil molestiae ut reiciendis\nqui aperiam non debitis possimus qui neque nisi nulla"
+  }
+]
+```
 
 ### POST /posts
- URL : https://jsonplaceholder.typicode.com/posts/
- Method : POST 
- Status : 201 Created 
- Returns : Entered data by me
- Fileds : title, body, userId
+- URL: `https://jsonplaceholder.typicode.com/posts`
+- Method: `POST`
+- Status: `201 Created`
+- Returns: Created resource data (API returns simulated ID)
+- Fields: `title`, `body`, `userId`
 
- Example response:
+Example response:
+```json
 {
-    "title": "My first post",
-    "body": "My first experimentation on postman.",
-    "userId": 1,
-    "id": 101
+  "title": "My first post",
+  "body": "My first experimentation on postman.",
+  "userId": 1,
+  "id": 101
 }
+```
 
 ### PUT /posts/1
- URL : https://jsonplaceholder.typicode.com/posts/1
- Method : PUT
- Status : 200 OK
- Returns : Updated the data.
- Fileds : title, body, userId, id
+- URL: `https://jsonplaceholder.typicode.com/posts/1`
+- Method: `PUT`
+- Status: `200 OK`
+- Returns: Updated post object
+- Fields: `title`, `body`, `userId`, `id`
 
- Example response:
- {
-    "title": "Learning REST API with postman",
-    "body": "Using PUT Query to see what well be the results",
-    "userId": 2,
-    "id": 1
+Example response:
+```json
+{
+  "title": "Learning REST API with postman",
+  "body": "Using PUT query to see what will be the results",
+  "userId": 2,
+  "id": 1
 }
+```
 
 ### DELETE /posts/1
-URL : https://jsonplaceholder.typicode.com/posts/1
-Method : DELETE
-Status : 200 OK 
-Fields : None 
+- URL: `https://jsonplaceholder.typicode.com/posts/1`
+- Method: `DELETE`
+- Status: `200 OK`
+- Returns: Empty object
 
-Example response 
+Example response:
+```json
 {}
-
+```
 
 ### GET /posts/1/comments
- URL : https://jsonplaceholder.typicode.com/posts/1/comments
- Method : GET
- Status : 200 OK
- Returns : Comments in the content 
- Fileds : postId, id, name, email, body
+- URL: `https://jsonplaceholder.typicode.com/posts/1/comments`
+- Method: `GET`
+- Status: `200 OK`
+- Returns: Array of comments
+- Fields: `postId`, `id`, `name`, `email`, `body`
 
- Example response 
- {
-        "postId": 1,
-        "id": 1,
-        "name": "id labore ex et quam laborum",
-        "email": "Eliseo@gardner.biz",
-        "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
-    },
-
+Example response:
+```json
+{
+  "postId": 1,
+  "id": 1,
+  "name": "id labore ex et quam laborum",
+  "email": "Eliseo@gardner.biz",
+  "body": "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium"
+}
+```
 
 ### GET /users/1
-URL : https://jsonplaceholder.typicode.com/users/1
-Method : GET
-Status : 200 OK 
-Fields : Response contains nested objects — address, geo, company
+- URL: `https://jsonplaceholder.typicode.com/users/1`
+- Method: `GET`
+- Status: `200 OK`
+- Returns: User object with nested `address`, `geo`, and `company`
 
-Example response 
+Example response:
+```json
 {
-    "id": 1,
-    "name": "Leanne Graham",
-    "username": "Bret",
-    "email": "Sincere@april.biz",
-    "address": {
-        "street": "Kulas Light",
-        "suite": "Apt. 556",
-        "city": "Gwenborough",
-        "zipcode": "92998-3874",
-        "geo": {
-            "lat": "-37.3159",
-            "lng": "81.1496"
-        }
-    },
-    "phone": "1-770-736-8031 x56442",
-    "website": "hildegard.org",
-    "company": {
-        "name": "Romaguera-Crona",
-        "catchPhrase": "Multi-layered client-server neural-net",
-        "bs": "harness real-time e-markets"
+  "id": 1,
+  "name": "Leanne Graham",
+  "username": "Bret",
+  "email": "Sincere@april.biz",
+  "address": {
+    "street": "Kulas Light",
+    "suite": "Apt. 556",
+    "city": "Gwenborough",
+    "zipcode": "92998-3874",
+    "geo": {
+      "lat": "-37.3159",
+      "lng": "81.1496"
     }
+  },
+  "phone": "1-770-736-8031 x56442",
+  "website": "hildegard.org",
+  "company": {
+    "name": "Romaguera-Crona",
+    "catchPhrase": "Multi-layered client-server neural-net",
+    "bs": "harness real-time e-markets"
+  }
 }
+```
 
 ### GET /todos?completed=false
-URL : https://jsonplaceholder.typicode.com/todos?completed=false
-Method : GET
-Status : 200 OK 
-Fields : Response contains which have not completed todos
+- URL: `https://jsonplaceholder.typicode.com/todos?completed=false`
+- Method: `GET`
+- Status: `200 OK`
+- Returns: Todos where `completed=false`
 
-Example response 
+Example response:
+```json
+[
+  {
+    "userId": 1,
+    "id": 3,
+    "title": "fugiat veniam minus",
+    "completed": false
+  }
+]
+```
+
+---
+
+## Notes
+
+- JSONPlaceholder is a fake online REST API, so `POST`, `PUT`, and `DELETE` requests do not actually change data on the server.
+- The responses are simulated to show how REST requests behave.
 {
      "userId": 1,
      "id": 1,
